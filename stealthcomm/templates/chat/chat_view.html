@@ -1,0 +1,50 @@
+<!-- File: templates/chat/chat_view.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="chat-container">
+    <div class="chat-header">
+        <h2>Chat with: 
+            {% for p in chat.participants %}
+                {% if p.id != session['user_id'] %}{{ p.username }}{% endif %}
+            {% endfor %}
+        </h2>
+    </div>
+
+    <div class="chat-messages">
+        <p>No messages yet. Start chatting!</p>
+        <!-- You can use JavaScript to load messages here via fetch(`/chat/get_messages/{{ chat.id }}`) -->
+    </div>
+
+    <div class="chat-input-area">
+        <input type="text" placeholder="Type your message here..." disabled>
+        <button disabled>Send</button>
+    </div>
+</div>
+
+<style>
+.chat-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: auto;
+}
+.chat-header {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+.chat-messages {
+    min-height: 200px;
+    background: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.chat-input-area input {
+    width: 80%;
+    padding: 8px;
+    margin-right: 5px;
+}
+.chat-input-area button {
+    padding: 8px 12px;
+}
+</style>
+{% endblock %}
