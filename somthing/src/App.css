@@ -1,0 +1,47 @@
+/* Prevent horizontal scroll */
+.App {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Ensure proper touch behavior */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection for content */
+p, h1, h2, h3, span {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* Phone desktop mode specific styles */
+@media screen and (max-device-width: 768px) and (orientation: landscape) {
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Force minimum font sizes for better readability */
+  h1 {
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+  }
+  
+  p {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem) !important;
+  }
+  
+  button {
+    font-size: clamp(0.8rem, 2vw, 1rem) !important;
+    padding: clamp(0.5rem, 2vw, 0.75rem) clamp(1rem, 4vw, 1.5rem) !important;
+  }
+}
+
+/* Better viewport handling for phones */
+@viewport {
+  width: device-width;
+  zoom: 1.0;
+}

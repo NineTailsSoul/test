@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles for better phone performance */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    height: 100%;
+    /* Better text rendering on mobile */
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    height: 100%;
+    font-family: system-ui, -apple-system, sans-serif;
+    /* Prevent zoom on input focus */
+    font-size: 16px;
+  }
+  
+  #root {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+/* Spline specific optimizations for mobile */
+@layer components {
+  /* Force proper sizing for Spline canvas */
+  canvas[data-engine="three.js r152"] {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    border-radius: 12px !important;
+  }
+  
+  /* Spline container improvements */
+  [data-spline-container] {
+    width: 100% !important;
+    height: 100% !important;
+    overflow: hidden !important;
+    border-radius: 12px !important;
+  }
+}
+
+/* Phone desktop mode specific fixes */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+  /* Landscape phone mode adjustments */
+  .container {
+    max-width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  /* Ensure text is readable */
+  h1 {
+    line-height: 1.2 !important;
+  }
+  
+  /* Button sizing for touch */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Portrait to landscape transition smoothing */
+@media screen and (max-width: 768px) {
+  /* Prevent layout shift during orientation change */
+  .grid {
+    transition: none !important;
+  }
+  
+  /* Better touch targets */
+  button, a {
+    touch-action: manipulation;
+  }
+}
+
+/* Performance optimizations */
+.animate-spin {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Reduce motion for better performance */
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin {
+    animation: none;
+  }
+  
+  .transition-all,
+  .transition-opacity {
+    transition: none;
+  }
+}
+
+/* Better backdrop blur support */
+@supports (backdrop-filter: blur(4px)) {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+@supports not (backdrop-filter: blur(4px)) {
+  .backdrop-blur-sm {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
